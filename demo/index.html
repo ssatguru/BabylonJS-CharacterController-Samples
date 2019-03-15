@@ -54,4 +54,30 @@
     <body>
         <canvas id="renderCanvas"></canvas>
     </body>
+    
+    <div id="overlay">
+        <div>
+            <h2>Demo of CharacterController for Babylonjs</h2>
+            <p>
+                For more information and source code head on over to <br>
+                <a href="https://github.com/ssatguru/BabylonJS-CharacterController"
+                   target='link'>
+                    https://github.com/ssatguru/BabylonJS-CharacterController</a>
+            </p>
+            <button id="closehelp" onclick="showHelp();">close</button>
+        </div>
+    </div>
+
+    <div id="controls">
+        <button id="help" >Help</button>
+    </div>
+    <script type="text/javascript">
+        var helpButton = document.getElementById("help");
+        var showHelp = function(){
+            var el = document.getElementById("overlay");
+            el.style.visibility = (el.style.visibility=="visible")?"hidden":"visible";
+        }
+        helpButton.onclick = showHelp;
+    </script>
+
 </html>
