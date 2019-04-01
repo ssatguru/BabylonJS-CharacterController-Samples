@@ -1,5 +1,5 @@
 let BABYLON = require("babylonjs");
-let EditControl = require("babylonjs-charactercontroller").CharacterController;
+let CharacterController = require("babylonjs-charactercontroller").CharacterController;
 
 
 window.onload = function(){
@@ -111,7 +111,7 @@ function loadPlayer(scene,engine,canvas){
         //a player animation.
         //here even though we have an animation range called "fall" we donot want to play 
         //the fall animation
-        cc.setFallAnim("fall",2,false);
+        cc.setFallAnim(null,2,false);
         cc.setSlideBackAnim("slideBack",1,false)
 
         cc.start();
