@@ -1,3 +1,7 @@
+[![npm](https://img.shields.io/npm/v/babylonjs-charactercontroller.svg)](https://npmjs.org/package/babylonjs-charactercontroller)
+[![npm](https://img.shields.io/npm/dm/babylonjs-charactercontroller.svg)](https://npmjs.org/package/babylonjs-charactercontroller)
+
+
 ## About
 A sample application to show how to use CharacterController from a TypeScript application.
 
