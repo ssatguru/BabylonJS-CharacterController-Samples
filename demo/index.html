@@ -1,83 +1,92 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>CharacterController Demo</title>
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+  <head>
+    <meta charset="utf-8" />
+    <title>CharacterController Demo</title>
 
-            #controls {
-                position: absolute;
-                left: 10px;
-                top: 10px;
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-            #renderCanvas {
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
+    <style>
+      html,
+      body {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
-            #overlay {
-                visibility: hidden;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                z-index: 1000;
-            }
+      #controls {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+      }
 
-            #overlay div {
-                width: 400px;
-                margin: 100px auto;
-                background-color: #fff;
-                border: 1px solid #000;
-                padding: 15px;
-                text-align: center;
-            }
-        </style>
-        <script src="dist/bundle.js"></script>
-        
-    </head>
+      #renderCanvas {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+      }
 
-    <body>
-        <canvas id="renderCanvas"></canvas>
-    </body>
-    
-    <div id="overlay">
-        <div>
-            <h2>Demo of CharacterController for Babylonjs</h2>
-            <p>
-                For more information and source code head on over to <br>
-                <a href="https://github.com/ssatguru/BabylonJS-CharacterController"
-                   target='link'>
-                    https://github.com/ssatguru/BabylonJS-CharacterController</a>
-            </p>
-            <button id="closehelp" onclick="showHelp();">close</button>
-        </div>
+      #overlay {
+        visibility: hidden;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        z-index: 1000;
+      }
+
+      #overlay div {
+        width: 600px;
+        margin: 100px auto;
+        opacity: 0.9;
+        text-align: center;
+      }
+    </style>
+
+    <link rel="stylesheet" href="assets/w3.css" media="screen" />
+
+    <script src="dist/bundle.js"></script>
+  </head>
+
+  <body>
+    <canvas id="renderCanvas"></canvas>
+
+    <div id="controls" style="opacity: 0.9;" class="w3-round w3-card-4 w3-grey">
+      <ui class="w3-ul w3-left">
+        <li><button id="w">walk</button></li>
+        <li><button id="wb">walkBack</button></li>
+        <li><button id="r">run</button></li>
+        <li><button id="j">jump</button></li>
+        <li><button id="tl">turnLeft</button></li>
+        <li><button id="tr">turnRight</button></li>
+        <li><button id="sl">strafeLeft</button></li>
+        <li><button id="sr">strafeRight</button></li>
+        <li>
+          <input type="radio" checked name="mode" class="w3-radio w3-orange" id="tp" /> third person
+          <br />
+          <input type="radio" name="mode" class="w3-radio" id="td" /> top down
+        </li>
+        <li><input type="checkbox" id="kb" checked class="w3-check" />enable keyboard</li>
+        <li><button id="help">help</button></li>
+      </ui>
     </div>
+  </body>
 
-    <div id="controls">
-        <button id="help" >Help</button>
+  <div id="overlay">
+    <div class="w3-card-4 w3-round w3-grey w3-padding">
+      <h3>Demo of CharacterController for Babylonjs</h3>
+      <p>
+        For more information and source code, head on over to <br />
+        <a href="https://ssatguru.github.io/BabylonJS-CharacterController/" target="link"> https://ssatguru.github.io/BabylonJS-CharacterController/</a>
+      </p>
+      <button id="closehelp">close</button>
     </div>
-    <script type="text/javascript">
-        var helpButton = document.getElementById("help");
-        var showHelp = function(){
-            var el = document.getElementById("overlay");
-            el.style.visibility = (el.style.visibility=="visible")?"hidden":"visible";
-        }
-        helpButton.onclick = showHelp;
-    </script>
-
+  </div>
 </html>
