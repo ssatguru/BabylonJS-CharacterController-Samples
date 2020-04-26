@@ -78,7 +78,7 @@ function loadPlayer(scene: Scene, engine: Engine, canvas: HTMLCanvasElement) {
         camera.attachControl(canvas, false);
 
         //let CharacterController = org.ssatguru.babylonjs.component.CharacterController;
-        let cc = new CharacterController(<Mesh>player, camera, scene);
+        let cc = new CharacterController(<Mesh>player, camera, scene, null, true);
         //below makes the controller point the camera at the player head which is approx
         //1.5m above the player origin
         cc.setCameraTarget(new Vector3(0, 1.5, 0));
