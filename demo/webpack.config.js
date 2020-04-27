@@ -5,8 +5,7 @@ module.exports = {
   entry: ["./src/index.ts"],
   devtool: "source-map",
   devServer: {
-    contentBase: "/",
-    publicPath: "/dist/",
+    publicPath: "/dist",
   },
   module: {
     rules: [

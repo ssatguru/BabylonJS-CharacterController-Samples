@@ -65,6 +65,9 @@ function loadPlayer(scene: Scene, engine: Engine, canvas: HTMLCanvasElement) {
         //standard camera setting
         camera.wheelPrecision = 15;
         camera.checkCollisions = false;
+        camera.inertia = 0.2;
+        camera.angularSensibilityX = 250;
+        camera.angularSensibilityY = 250;
         //make sure the keyboard keys controlling camera are different from those controlling player
         //here we will not use any keyboard keys to control camera
         camera.keysLeft = [];
@@ -108,6 +111,8 @@ function loadPlayer(scene: Scene, engine: Engine, canvas: HTMLCanvasElement) {
         //the fall animation
         cc.setFallAnim("fall", 2, false);
         cc.setSlideBackAnim("slideBack", 1, false)
+
+        cc.setTurnSpeed(20);
 
         cc.start();
 
