@@ -5,8 +5,10 @@ window.onload = function () {
     main();
 }
 
+var canvas;
+
 function main() {
-    let canvas = <HTMLCanvasElement>document.querySelector("#renderCanvas");
+    canvas = <HTMLCanvasElement>document.querySelector("#renderCanvas");
     let engine = new Engine(canvas, true);
     let scene = new Scene(engine);
     scene.clearColor = new Color4(0.75, 0.75, 0.75, 1);
@@ -112,7 +114,8 @@ function loadPlayer(scene: Scene, engine: Engine, canvas: HTMLCanvasElement) {
         cc.setFallAnim("fall", 2, false);
         cc.setSlideBackAnim("slideBack", 1, false)
 
-        cc.setTurnSpeed(20);
+        //turn speed in degrees/second
+        cc.setTurnSpeed(45);
 
         cc.start();
 
@@ -121,6 +124,7 @@ function loadPlayer(scene: Scene, engine: Engine, canvas: HTMLCanvasElement) {
         });
 
         setControls(cc);
+        canvas.focus();
 
     });
 }
@@ -197,6 +201,7 @@ function createGroundMaterial(scene) {
 function toggleClass(e) {
     e.target.classList.toggle("w3-pale-red");
     e.target.classList.toggle("w3-pale-green");
+    canvas.focus();
 }
 
 let w,
@@ -215,6 +220,14 @@ function setControls(cc: CharacterController) {
         e.className = "w3-btn w3-border w3-round w3-pale-red";
     }
 
+    document.getElementById("pl").onclick = (e) => {
+        canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock || false;
+        if (canvas.requestPointerLock) {
+            canvas.requestPointerLock();
+        }
+        canvas.focus();
+    };
+
     document.getElementById("w").onclick = (e) => {
         cc.walk((w = !w));
         toggleClass(e);
@@ -229,6 +242,7 @@ function setControls(cc: CharacterController) {
     };
     document.getElementById("j").onclick = (e) => {
         cc.jump();
+        canvas.focus();
     };
     document.getElementById("tl").onclick = (e) => {
         cc.turnLeft((tl = !tl));
