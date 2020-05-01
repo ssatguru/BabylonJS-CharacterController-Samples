@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "babylonjs": "^4.1.0",
-    "babylonjs-charactercontroller": "^0.4.0",
+    "babylonjs-charactercontroller": "^0.4.2",
     "ts-loader": "^5.4.5",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
