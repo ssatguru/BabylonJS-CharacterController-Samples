@@ -261,9 +261,9 @@ function setControls(cc: CharacterController) {
         toggleClass(e);
     };
 
-    document.getElementById("tp").onclick = (e) => cc.setMode(0);
-    document.getElementById("td").onclick = (e) => cc.setMode(1);
-    document.getElementById("kb").onclick = (e) => cc.enableKeyBoard((<HTMLInputElement>e.target).checked);
+    document.getElementById("tp").onclick = (e) => { cc.setMode(0); canvas.focus(); }
+    document.getElementById("td").onclick = (e) => { cc.setMode(1); canvas.focus(); }
+    document.getElementById("kb").onclick = (e) => { cc.enableKeyBoard((<HTMLInputElement>e.target).checked); canvas.focus(); }
     document.getElementById("help").onclick = showHelp;
     document.getElementById("closehelp").onclick = showHelp;
 }
@@ -271,4 +271,5 @@ function setControls(cc: CharacterController) {
 var showHelp = function () {
     var el = document.getElementById("overlay");
     el.style.visibility = el.style.visibility == "visible" ? "hidden" : "visible";
+    canvas.focus();
 };
