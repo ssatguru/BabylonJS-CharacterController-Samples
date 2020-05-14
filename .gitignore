@@ -2,4 +2,4 @@ nbproject
 node_modules
 *.bat
 **/ig_*.*
-demo/assets/player/Vincent-backFacing.babylon
+!demo/node_modules
