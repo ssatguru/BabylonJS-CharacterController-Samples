@@ -12,8 +12,8 @@
   "devDependencies": {
     "babylonjs": "^3.3.0",
     "babylonjs-charactercontroller": "^0.2.0",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     
