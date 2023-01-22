@@ -11,17 +11,43 @@ function main() {
   canvas = document.querySelector("#renderCanvas");
   var engine = new BABYLON.Engine(canvas, true);
   var scene = new BABYLON.Scene(engine);
+  //scene.useRightHandedSystem = true;
+
   scene.clearColor = new BABYLON.Color3(0.75, 0.75, 0.75);
   scene.ambientColor = new BABYLON.Color3(1, 1, 1);
 
   scene.debugLayer.show({ showExplorer: true, embedMode: true });
 
   var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-  light.intensity = 0.3;
+  light.intensity = 1;
 
-  var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-1, -1, -1), scene);
-  light2.position = new BABYLON.Vector3(0, 128, 0);
-  light2.intensity = 0.7;
+  // var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-1, -1, -1), scene);
+  // light2.position = new BABYLON.Vector3(0, 128, 0);
+  // light2.intensity = 0.7;
+
+  var myMaterial = new BABYLON.StandardMaterial("myMaterial", scene);
+
+  //boxes to check camera elasticity and making obstructions invisibile checks
+
+  var box = BABYLON.Mesh.CreateBox("box1", 2, scene);
+  box.checkCollisions = false;
+  box.position = new BABYLON.Vector3(0, 8, 5);
+  box.material = myMaterial;
+  box.isVisible = false;
+
+  var box2 = BABYLON.Mesh.CreateBox("box2", 2, scene);
+  box2.checkCollisions = true;
+  box2.position = new BABYLON.Vector3(0, 8, 7);
+
+  let box3 = box.createInstance("box3");
+  box3.position = new BABYLON.Vector3(0, 8, -7);
+  box3.checkCollisions = true;
+
+  //check for visibility
+  let box4 = BABYLON.Mesh.CreateBox("box4", 2, scene);
+  box4.position = new BABYLON.Vector3(5, 8, 5);
+  box4.checkCollisions = false;
+  box4.visibility = 0;
 
   let groundMaterial = createGroundMaterial(scene);
   var ground = createGround(scene, groundMaterial);
@@ -35,7 +61,8 @@ function main() {
 var cc;
 
 function loadPlayer(scene, engine, canvas) {
-  BABYLON.SceneLoader.ImportMesh("", "player/", "Vincent-frontFacing.babylon", scene, function (meshes, particleSystems, skeletons) {
+  //BABYLON.SceneLoader.ImportMesh("", "player/", "Vincent-frontFacing.babylon", scene, function (meshes, particleSystems, skeletons) {
+  BABYLON.SceneLoader.ImportMesh("", "player/", "starterAvatars.babylon", scene, function (meshes, particleSystems, skeletons) {
     var player = meshes[0];
     var skeleton = skeletons[0];
     player.skeleton = skeleton;
@@ -66,7 +93,7 @@ function loadPlayer(scene, engine, canvas) {
 
     //standard camera setting
     camera.wheelPrecision = 15;
-    camera.checkCollisions = false;
+    camera.checkCollisions = true;
     //make sure the keyboard keys controlling camera are different from those controlling player
     //here we will not use any keyboard keys to control camera
     camera.keysLeft = [];
@@ -76,11 +103,12 @@ function loadPlayer(scene, engine, canvas) {
     //how close can the camera come to player
     camera.lowerRadiusLimit = 2;
     //how far can the camera go from the player
-    camera.upperRadiusLimit = 20;
-    camera.attachControl(canvas, false);
+    camera.upperRadiusLimit = 200;
+
+    camera.attachControl();
 
     cc = new CharacterController(player, camera, scene);
-    cc.setFaceForward(true);
+    cc.setFaceForward(false);
     cc.setMode(0);
     cc.setTurnSpeed(45);
     //below makes the controller point the camera at the player head which is approx
@@ -109,6 +137,16 @@ function loadPlayer(scene, engine, canvas) {
     cc.setFallAnim("fall", 2, false);
     cc.setSlideBackAnim("slideBack", 1, false);
 
+    let walkSound = new BABYLON.Sound(
+      "walk",
+      "./sounds/footstep_carpet_000.ogg",
+      scene,
+      () => {
+        cc.setSound(walkSound);
+      },
+      { loop: false }
+    );
+
     var ua = window.navigator.userAgent;
     var isIE = /MSIE|Trident/.test(ua);
     if (isIE) {
@@ -116,6 +154,8 @@ function loadPlayer(scene, engine, canvas) {
       cc.setJumpKey("spacebar");
     }
 
+    cc.setCameraElasticity(true);
+    cc.makeObstructionInvisible(true);
     cc.start();
 
     engine.runRenderLoop(function () {
@@ -309,6 +349,16 @@ function setControls() {
     cc.enableKeyBoard(e.target.checked);
     canvas.focus();
   };
-  document.getElementById("help").onclick = showHelp;
+  // document.getElementById("help").onclick = showHelp;
   document.getElementById("closehelp").onclick = showHelp;
+
+  let animPaused = false;
+  document.getElementById("help").onclick = (e) => {
+    if (animPaused) {
+      cc.resumeAnim();
+    } else {
+      cc.pauseAnim();
+    }
+    animPaused = !animPaused;
+  };
 }

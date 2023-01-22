@@ -8,8 +8,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babylonjs": "^4.1.0",
-    "babylonjs-inspector": "^4.1.0"
+    "babylonjs": "^5.37.0",
+    "babylonjs-inspector": "^5.37.0"
   },
   "dependencies": {}
 }
